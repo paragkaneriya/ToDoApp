@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Activities.MainActivity">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:padding="20dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:gravity="center_vertical"
+                android:hint="Task Title"
+                android:backgroundTint="@color/black"
+                android:textColorHint="@color/txt_hint_color"
+                android:theme="@style/EditTextThemeOverlay"
+                app:boxStrokeColor="@color/border_color"
+
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_task_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:backgroundTint="@color/black"
+                    android:lineSpacingExtra="5.03sp"
+                    android:singleLine="true"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/txt_add_task" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="340"
+                android:layout_marginTop="32dp"
+                android:gravity="center_vertical"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_weight="258"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:gravity="center_vertical"
+                    android:hint="Time"
+                    android:textColorHint="@color/txt_hint_color"
+                    android:theme="@style/EditTextThemeOverlay"
+                    app:boxStrokeColor="@color/border_color"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edt_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:maxLength="5"
+                        android:textSize="16sp"
+                        android:lineSpacingExtra="5.03sp"
+                        android:singleLine="true"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/txt_add_task" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Spinner
+                    android:id="@+id/spnr_add_task"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="72"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/raw_spinner_background"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4.01sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_horizontal"
+
+                >
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="102dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/raw_button_empty_border"
+                    android:text="CANCEL"
+                    android:textSize="14sp"
+                    android:textColor="#6750A4"
+                    android:id="@+id/acb_cancel"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="76dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/raw_button_fill_border"
+                    android:text="ADD"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/acb_add"
+                    android:layout_marginStart="8dp"/>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

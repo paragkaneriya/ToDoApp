@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:background="@drawable/raw_dialog_border">
+
+        <TextView
+            android:id="@+id/txt_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Warning"
+            android:textSize="24sp"
+            android:textColor="#1D1B20"
+            android:fontFamily="@font/roboto"/>
+
+        <TextView
+            android:id="@+id/txt_dialog_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Do you want to delete “Classification”, this action can’t be undone.  "
+            android:textSize="14sp"
+            android:layout_marginTop="16dp"
+            android:textColor="#49454F"
+            android:fontFamily="@font/roboto"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="58dp"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:paddingEnd="12dp">
+
+            <TextView
+                android:id="@+id/txt_dialog_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_marginEnd="32dp"
+                android:textColor="#A14AAD"
+                android:textSize="14sp"/>
+            />
+        <TextView
+            android:id="@+id/txt_dialog_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:textColor="#A14AAD"
+            android:textSize="14sp"/>
+            />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</layout>
