@@ -12,9 +12,32 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#7086F6</item>
         <!-- Customize your theme here. -->
+
+        <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
+
     </style>
 
     <style name="EditTextThemeOverlay" parent="ThemeOverlay.AppCompat">
         <item name="colorAccent">@color/border_color</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+
+        <item name="materialThemeOverlay">@style/myCustomThemeForNormalFab</item>
+        <item name="shapeAppearanceOverlay">@style/customNormalFAB</item>
+    </style>
+
+    <style name="customNormalFAB">
+
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+
+    </style>
+
+    <style name="myCustomThemeForNormalFab" parent="">
+
+        <item name="colorSecondary">#ECE6F0</item>
+        <item name="colorOnSecondary">@color/black</item>
+
     </style>
 </resources>

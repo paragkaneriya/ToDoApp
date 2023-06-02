@@ -26,10 +26,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.Viewholder> {
     Context mContext;
     OnItemClickListner closeButtonClick;
 
-    public TaskAdapter(ArrayList<Task> taskList, Context mContext,OnItemClickListner closeButtonClick) {
+    OnCheckboxClickListner checkboxClickListner;
+
+    public TaskAdapter(ArrayList<Task> taskList, Context mContext,OnItemClickListner closeButtonClick,OnCheckboxClickListner checkboxClickListner) {
         this.taskList = taskList;
         this.mContext = mContext;
         this.closeButtonClick=closeButtonClick;
+        this.checkboxClickListner = checkboxClickListner;
     }
 
     @NonNull
@@ -51,17 +54,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.Viewholder> {
         holder.binding.txtEventName.setText(task.getTask_title());
         holder.binding.txtEventTime.setText(task.getTime() + " " + task.getAm_pm());
 
-        if (task.isExpired()){
-
-            holder.binding.txtEventName.setTextColor(mContext.getColor(R.color.red));
-            holder.binding.txtEventStatus.setVisibility(View.VISIBLE);
-
+        if (task.isDone()){
+            holder.binding.cbEvent.setBackground(mContext.getResources().getDrawable(R.drawable.ic_checked));
+            holder.binding.txtEventName.setPaintFlags(holder.binding.txtEventName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }else {
+            holder.binding.cbEvent.setBackground(mContext.getResources().getDrawable(R.drawable.ic_empty_checkbox));
+            holder.binding.txtEventName.setPaintFlags(holder.binding.txtEventName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+            if (task.isExpired()){
 
-            holder.binding.txtEventName.setTextColor(mContext.getColor(R.color.txt_event_color));
-            holder.binding.txtEventStatus.setVisibility(View.GONE);
+                holder.binding.txtEventName.setTextColor(mContext.getColor(R.color.red));
+                holder.binding.txtEventStatus.setVisibility(View.VISIBLE);
 
+            }else {
+
+                holder.binding.txtEventName.setTextColor(mContext.getColor(R.color.txt_event_color));
+                holder.binding.txtEventStatus.setVisibility(View.GONE);
+
+            }
         }
+
+
 
         holder.binding.cbEvent.setChecked(task.isIsselected());
 
@@ -85,6 +97,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.Viewholder> {
                 }else {
                     holder.binding.cbEvent.setBackground(mContext.getResources().getDrawable(R.drawable.ic_empty_checkbox));
                     holder.binding.txtEventName.setPaintFlags(holder.binding.txtEventName.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+
+
                     if (task.isExpired()){
 
                         holder.binding.txtEventName.setTextColor(mContext.getColor(R.color.red));
@@ -92,6 +106,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.Viewholder> {
 
                     }
                 }
+
+                checkboxClickListner.onCheckboxClick(position);
 
             }
         });
@@ -130,6 +146,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.Viewholder> {
 
     public interface OnItemClickListner{
         public void onCloseButtonClick(int postion);
+
+    }
+
+    public interface OnCheckboxClickListner{
+        public void onCheckboxClick(int postion);
 
     }
 }

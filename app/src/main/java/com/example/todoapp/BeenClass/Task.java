@@ -28,6 +28,10 @@ public class Task {
     @Expose
     private boolean isExpired = false;
 
+    @SerializedName("isDone")
+    @Expose
+    private boolean isDone = false;
+
     public Task(String task_title, String time, String am_pm) {
         this.task_title = task_title;
         this.time = time;
@@ -44,6 +48,14 @@ public class Task {
 
     public void setExpired(boolean expired) {
         isExpired = expired;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
     }
 
     public String getId() {

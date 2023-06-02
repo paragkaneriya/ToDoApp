@@ -31,7 +31,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity implements TaskAdapter.OnItemClickListner {
+public class MainActivity extends AppCompatActivity implements TaskAdapter.OnItemClickListner, TaskAdapter.OnCheckboxClickListner {
 
     ActivityMainBinding binding;
     boolean doubleBackToExitPressedOnce = false;
@@ -57,15 +57,18 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
         loadTaskData();
 
         if (tasks.size() > 0) {
-            adapter = new TaskAdapter(tasks, MainActivity.this, MainActivity.this);
+            adapter = new TaskAdapter(tasks, MainActivity.this, MainActivity.this,MainActivity.this);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
             binding.rclrToDoList.setLayoutManager(layoutManager);
             binding.rclrToDoList.setAdapter(adapter);
+
+            timer.scheduleAtFixedRate(new myTimerTask(), 0, 30000);
+
         } else {
             binding.rclrToDoList.setVisibility(View.GONE);
         }
 
-        timer.scheduleAtFixedRate(new myTimerTask(), 0, 30000);
+
 
 
     }
@@ -145,6 +148,10 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
 
                 adapter.filterList(tasks);
 
+                if (tasks.size() == 0){
+                    binding.rclrToDoList.setVisibility(View.GONE);
+                }
+
                 dialogBuilder.dismiss();
             }
         });
@@ -160,6 +167,17 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
 
         dialogBuilder.setView(dialogView);
         dialogBuilder.show();
+
+    }
+
+    @Override
+    public void onCheckboxClick(int postion) {
+
+        Task task = tasks.get(postion);
+
+        task.setDone(task.isIsselected());
+
+        saveTaskData();
 
     }
 
