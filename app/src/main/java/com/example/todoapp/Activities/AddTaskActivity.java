@@ -18,7 +18,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,6 +92,30 @@ public class AddTaskActivity extends AppCompatActivity {
 
                     Task task = new Task(binding.edtTaskTitle.getText().toString(), binding.edtTime.getText().toString(), strAmPm);
                     tasks.add(task);
+
+                    Collections.sort(tasks, new Comparator<Task>() {
+                        @Override
+                        public int compare(Task o1, Task o2) {
+
+
+                            try {
+
+                                String current_time_a_o1 = o1.getTime() + " " + o1.getAm_pm().toLowerCase();
+
+                                String current_time_o1 = String.valueOf(new SimpleDateFormat("hh:mm a").parse(current_time_a_o1));
+
+                                String current_time_a_o2 = o2.getTime() + " " + o2.getAm_pm().toLowerCase();
+
+                                String current_time_o2 = String.valueOf(new SimpleDateFormat("hh:mm a").parse(current_time_a_o2));
+
+                                return current_time_o1.compareTo(current_time_o2);
+                            } catch (ParseException e) {
+                                throw new RuntimeException(e);
+                            }
+
+//                            return o1.getTime().compareTo(o2.getTime());
+                        }
+                    });
 
                     saveTaskData();
 
