@@ -3,6 +3,7 @@ package com.example.todoapp.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Paint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.Viewholder> {
     ArrayList<Task> taskList;
     Context mContext;
     OnItemClickListner closeButtonClick;
-
+    String time;
     OnCheckboxClickListner checkboxClickListner;
 
     public TaskAdapter(ArrayList<Task> taskList, Context mContext,OnItemClickListner closeButtonClick,OnCheckboxClickListner checkboxClickListner) {
@@ -52,7 +53,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.Viewholder> {
         Task task = taskList.get(position);
 
         holder.binding.txtEventName.setText(task.getTask_title());
-        holder.binding.txtEventTime.setText(task.getTime() + " " + task.getAm_pm());
+
+        String first = String.valueOf(task.getTime().charAt(0));
+
+        if(first.equals("0")){
+
+            time = task.getTime().substring(1);
+
+        }else {
+            time = task.getTime();
+        }
+
+        holder.binding.txtEventTime.setText(time + " " + task.getAm_pm());
 
         if (task.isDone()){
             holder.binding.cbEvent.setBackground(mContext.getResources().getDrawable(R.drawable.ic_checked));

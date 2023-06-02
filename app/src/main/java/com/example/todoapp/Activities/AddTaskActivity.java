@@ -18,11 +18,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -31,6 +29,17 @@ public class AddTaskActivity extends AppCompatActivity {
     String strAmPm;
     ArrayList<Task> tasks;
 
+    public static boolean isValidTime(final String time) {
+
+        Pattern pattern;
+        Matcher matcher;
+        final String TIME_PATTERN = "[0-1][0-9]:[0-5][0-9]";
+        pattern = Pattern.compile(TIME_PATTERN);
+        matcher = pattern.matcher(time);
+
+        return matcher.matches();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +81,9 @@ public class AddTaskActivity extends AppCompatActivity {
                     Toast.makeText(AddTaskActivity.this, "Please Enter Title", Toast.LENGTH_SHORT).show();
                 } else if (binding.edtTime.getText().toString().equals("")) {
                     Toast.makeText(AddTaskActivity.this, "Please Enter Time", Toast.LENGTH_SHORT).show();
+                } else if (binding.edtTime.getText().toString().length() < 5 || !isValidTime(binding.edtTime.getText().toString())) {
+                    Toast.makeText(AddTaskActivity.this, "Please Enter Valid Time Format like 00:00", Toast.LENGTH_SHORT).show();
+
                 } else {
 
                     Task task = new Task(binding.edtTaskTitle.getText().toString(), binding.edtTime.getText().toString(), strAmPm);
@@ -98,7 +110,6 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
     }
-
 
     @Override
     public void onBackPressed() {
@@ -132,5 +143,6 @@ public class AddTaskActivity extends AppCompatActivity {
         editor.putString("task", json);
         editor.apply();
     }
+
 
 }
